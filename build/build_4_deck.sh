@@ -1,4 +1,5 @@
 GO_VERSION=1.20.3
+VERSION=0.0.1
 STEAM_RT=registry.gitlab.steamos.cloud/steamrt/scout/sdk:latest
 
 if test -f "go$GO_VERSION.linux-amd64.tar.gz"; then
@@ -18,6 +19,5 @@ export PATH=$PATH:/tmp/go/bin/
 export GOCACHE=/tmp/
 export GOPATH=/tmp/go
 export CGO_CFLAGS=-std=gnu99
-go env
-go build -o bin/steam_egj23
+go build -ldflags \"-X main.version=$VERSION -X main.buildtime=`date +%Y-%m-%d@%H:%M:%S`\"  -o bin/steam_egj23
 "

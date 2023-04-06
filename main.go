@@ -33,7 +33,7 @@ func main() {
 	ebiten.SetWindowSize(1280, 720)
 	ebiten.SetWindowTitle("Hello, World!")
 	var err error
-	logo, _, err = ebitenutil.NewImageFromFileSystem(assets.Data, "pong/logo.png")
+	logo, _, err = ebitenutil.NewImageFromFileSystem(assets.Data, "pong/logo2.png")
 	if err != nil {
 		panic(err)
 	}
