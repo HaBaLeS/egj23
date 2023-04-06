@@ -1,0 +1,4 @@
+egj23
+bin/*
+build/go*tar.gz
+.idea/
