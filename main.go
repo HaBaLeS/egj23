@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/habales/egj23/assets"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
@@ -9,6 +10,8 @@ import (
 )
 
 var logo *ebiten.Image
+var version string
+var buildtime string
 
 type Game struct{}
 
@@ -26,6 +29,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 }
 
 func main() {
+	fmt.Printf("Version:%s -- BuildTime %s", version, buildtime)
 	ebiten.SetWindowSize(1280, 720)
 	ebiten.SetWindowTitle("Hello, World!")
 	var err error
