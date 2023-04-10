@@ -1,6 +1,6 @@
 VERSION=v0.0.1
 
-.PHONY: build deck
+.PHONY: build deck win
 build:
 	go build -ldflags "-X main.version=$(VERSION) -X main.buildtime=`date +%Y-%m-%d@%H:%M:%S`" -o bin/
 
@@ -12,3 +12,9 @@ deck:
 
 run: build
 	./bin/egj23
+
+win:
+	env GOOS=windows GOARCH=amd64   go build -ldflags "-X main.version=$(VERSION) -X main.buildtime=`date +%Y-%m-%d@%H:%M:%S`" -o bin/
+
+upload: deck
+	scp bin/steam_egj23 deck@192.168.1.87:~/Downloads/
