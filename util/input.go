@@ -2,6 +2,7 @@ package util
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 var gamepadIDs []ebiten.GamepadID
@@ -57,7 +58,20 @@ func GetInputEvents() map[int]float64 {
 		} else if ebiten.IsGamepadButtonPressed(id, ebiten.GamepadButton11) {
 			evl[UP] = 1
 		}
+	}
 
+	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		evl[BTN_A] = 1
+	} else if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		evl[BTN_A] = 1
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+		evl[DOWN] = 1
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+		evl[UP] = 1
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+		evl[RIGHT] = 1
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+		evl[LEFT] = 1
 	}
 
 	//fmt.Printf("got %v\n", evl)

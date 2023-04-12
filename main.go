@@ -108,7 +108,7 @@ func main() {
 
 	gameList = games.Init()
 
-	fmt.Printf("Version:%s -- BuildTime %s", version, buildtime)
+	fmt.Printf("Version:%s -- BuildTime %s\n", version, buildtime)
 	ebiten.SetWindowSize(1280, 720)
 	ebiten.SetWindowTitle("Private Easter Game Jam 2023")
 

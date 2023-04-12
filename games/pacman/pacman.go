@@ -7,12 +7,17 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/audio"
 	"golang.org/x/image/colornames"
 	"golang.org/x/image/font"
+	"image/color"
 )
 
 const (
-	BG_TIME  = 30000.0
-	MAZE_PAD = 10
+	BG_TIME    = 30000.0
+	MAZE_PAD   = 5
+	BRICK_SIZE = 26
 )
+
+var C_SOLID = color.RGBA{118, 66, 138, 255}
+var C_OPEN = color.RGBA{0, 0, 0, 255}
 
 type PacMan struct {
 	logo         *gjfw.Sprite
@@ -25,6 +30,8 @@ type PacMan struct {
 	testimgage *gjfw.Sprite
 
 	bgm *audio.Player
+
+	mazeData []*gjfw.Element
 }
 
 func New() *PacMan {
@@ -65,6 +72,18 @@ func (p *PacMan) Logo() *gjfw.Sprite {
 func (p *PacMan) Start() {
 	p.bgm.Seek(0)
 	p.bgm.Play()
+
+	mapImg := util.LoadImage("pacman/play_field.png")
+	for i := 0; i < mapImg.Bounds().Dy(); i++ {
+		for j := 0; j < mapImg.Bounds().Dx(); j++ {
+			c := mapImg.At(j, i)
+			if c == C_SOLID {
+				p.mazeData = append(p.mazeData, gjfw.NewSquareC(float32(300+j*BRICK_SIZE), float32(MAZE_PAD+i*BRICK_SIZE), BRICK_SIZE, colornames.Cornflowerblue))
+			} else if c == C_OPEN {
+				p.mazeData = append(p.mazeData, gjfw.NewSquareC(float32(300+j*BRICK_SIZE), float32(MAZE_PAD+i*BRICK_SIZE), BRICK_SIZE, color.Black))
+			}
+		}
+	}
 }
 
 func (p *PacMan) Stop() {
@@ -82,8 +101,11 @@ func (p *PacMan) Update(d float64, ev map[int]float64) {
 	}
 }
 
-func (p *PacMan) Draw(screen *ebiten.Image) {
-	p.bgList[p.currentIdx].Render(screen)
+func (p *PacMan) Draw(surface *ebiten.Image) {
+	p.bgList[p.currentIdx].Render(surface)
 
-	p.testimgage.Render(screen)
+	for _, b := range p.mazeData {
+		b.Render(surface)
+	}
+
 }
