@@ -62,10 +62,10 @@ func New() *Pong {
 	lx := float32(gjfw.CFG.ScreenHeight) - (margin + lineHeight)
 	p.lowerBorder = &gjfw.Element{X: margin, Y: lx, W: w, H: lineHeight, Color: colornames.Limegreen}
 
-	p.ball = &gjfw.Element{300, float32(gjfw.CFG.ScreenHeight) / 2, BALL_HEIGHT, BALL_HEIGHT, colornames.Darkred}
+	p.ball = gjfw.NewElementRectC(300, float32(gjfw.CFG.ScreenHeight)/2, BALL_HEIGHT, BALL_HEIGHT, colornames.Darkred)
 
-	p.paddleA = &gjfw.Element{margin, 720/2 - 0.5*PADDLE_HEIGHT, paddleWidth, PADDLE_HEIGHT, colornames.Greenyellow}
-	p.paddleB = &gjfw.Element{1280 - margin - paddleWidth, 720/2 - 0.5*PADDLE_HEIGHT, paddleWidth, PADDLE_HEIGHT, colornames.Greenyellow}
+	p.paddleA = gjfw.NewElementRectC(margin, 720/2-0.5*PADDLE_HEIGHT, paddleWidth, PADDLE_HEIGHT, colornames.Greenyellow)
+	p.paddleB = gjfw.NewElementRectC(1280-margin-paddleWidth, 720/2-0.5*PADDLE_HEIGHT, paddleWidth, PADDLE_HEIGHT, colornames.Greenyellow)
 
 	p.background = gjfw.NewSprite("pong/01522-3155113783-spiral flash_ dream.png")
 	p.background.SetSize(float64(gjfw.CFG.ScreenWidth), float64(gjfw.CFG.ScreenHeight))
@@ -94,6 +94,7 @@ func New() *Pong {
 }
 
 func (g *Pong) Start() {
+	g.bgm.SetVolume(gjfw.CFG.Volume)
 	g.bgm.SetVolume(0.3)
 	g.bgm.Play()
 }

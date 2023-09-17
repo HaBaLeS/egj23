@@ -37,6 +37,7 @@ func (g *Game) Update() error {
 	//fmt.Printf("Got %d events: %v\n", len(evl), evl)
 
 	if !gameMode && !g.bgm.IsPlaying() {
+		g.bgm.SetVolume(gjfw.CFG.Volume)
 		g.bgm.Seek(0)
 		g.bgm.Play()
 	}

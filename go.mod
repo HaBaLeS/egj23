@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/hajimehoshi/ebiten/v2 v2.5.1
+	github.com/jakecoffman/cp v1.2.1
 	golang.org/x/image v0.6.0
 )
 

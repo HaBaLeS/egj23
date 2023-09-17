@@ -1,6 +1,7 @@
 package games
 
 import (
+	"github.com/habales/egj23/games/mapgen"
 	"github.com/habales/egj23/games/pacman"
 	"github.com/habales/egj23/games/pong"
 	"github.com/habales/egj23/gjfw"
@@ -23,5 +24,7 @@ func Init() []JamGame {
 
 	games = append(games, pong.New())
 	games = append(games, pacman.New())
+	games = append(games, mapgen.New(32))
+
 	return games
 }

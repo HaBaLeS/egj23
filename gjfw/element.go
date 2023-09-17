@@ -3,7 +3,6 @@ package gjfw
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
-	"github.com/jakecoffman/cp"
 	"image/color"
 )
 
@@ -13,7 +12,6 @@ type Element struct {
 	X, Y, W, H float32
 	Color      color.Color
 	//fixme use rectangle or similr
-	body cp.Body
 }
 
 func NewSquare(x, y, s float32) *Element {
@@ -22,6 +20,11 @@ func NewSquare(x, y, s float32) *Element {
 }
 func NewSquareC(x, y, s float32, c color.Color) *Element {
 	e := &Element{X: x, Y: y, W: s, H: s, Color: c}
+	return e
+}
+
+func NewElementRectC(x, y, w, h float32, c color.Color) *Element {
+	e := &Element{X: x, Y: y, W: w, H: h, Color: c}
 	return e
 }
 

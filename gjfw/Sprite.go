@@ -7,6 +7,7 @@ import (
 
 type Sprite struct {
 	x, y, w, h, sx, sy float64
+	rot                float64
 	img                *ebiten.Image
 	op                 *ebiten.DrawImageOptions
 }
@@ -30,6 +31,11 @@ func (sp *Sprite) SetPos(x, y int) {
 	sp.x = float64(x)
 	sp.y = float64(y)
 	sp.op.GeoM.Reset()
+	if sp.rot != 0 {
+		sp.op.GeoM.Translate(-sp.w/2, -sp.h/2)
+		sp.op.GeoM.Rotate(sp.rot)
+		sp.op.GeoM.Translate(sp.w/2, sp.h/2)
+	}
 	sp.op.GeoM.Scale(sp.sx, sp.sy)
 	sp.op.GeoM.Translate(sp.x, sp.y)
 }
@@ -46,4 +52,12 @@ func (sp *Sprite) SetAlpha(a float32) {
 
 func (sp *Sprite) Render(suface *ebiten.Image) {
 	suface.DrawImage(sp.img, sp.op)
+}
+
+func (sp *Sprite) Pos() (x, y int) {
+	return int(sp.x), int(sp.y)
+}
+
+func (sp *Sprite) Rotate(rad float64) {
+	sp.rot = rad
 }
